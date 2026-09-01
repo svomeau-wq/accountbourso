@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Espace - Banque{% endblock %}</title>
+    <style>
+        /* ------------------------------------------------------------------
+           Style inspiré de Boursorama
+           Couleurs :
+             - Rose principal : #E6007E
+             - Rose foncé     : #C20069
+             - Bleu nuit      : #1A1A2E (texte principal)
+             - Gris très clair: #F5F5F7 (fond)
+             - Vert positif   : #00A86B
+             - Rouge négatif  : #D32F2F
+        ------------------------------------------------------------------ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background: #F5F5F7;
+            color: #1A1A2E;
+            min-height: 100vh;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5ea;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #E6007E;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: #1A1A2E; }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 14px;
+        }
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            border-radius: 24px;
+            background: #F5F5F7;
+        }
+        .avatar {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: #E6007E;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .logout-btn {
+            color: #E6007E;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 24px;
+            transition: background 0.2s;
+        }
+        .logout-btn:hover { background: #fce4ec; }
+
+        /* Navigation */
+        .nav {
+            background: #fff;
+            border-bottom: 1px solid #e5e5ea;
+            padding: 0 32px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+        }
+        .nav a {
+            padding: 16px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1A1A2E;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover { color: #E6007E; }
+        .nav a.active {
+            color: #E6007E;
+            border-bottom-color: #E6007E;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 32px auto;
+            padding: 0 32px;
+        }
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1A1A2E;
+        }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1A1A2E;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-title a {
+            font-size: 13px;
+            color: #E6007E;
+            font-weight: 600;
+        }
+
+        /* Flash messages */
+        .flash {
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .flash-error   { background: #ffebee; color: #C62828; border-left: 4px solid #D32F2F; }
+        .flash-success { background: #e8f5e9; color: #2E7D32; border-left: 4px solid #00A86B; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #E6007E;
+            color: #fff;
+        }
+        .btn-primary:hover { background: #C20069; }
+        .btn-secondary {
+            background: #fff;
+            color: #E6007E;
+            border: 1.5px solid #E6007E;
+        }
+        .btn-secondary:hover { background: #fce4ec; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+        th {
+            font-weight: 600;
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #fafafa; }
+
+        .montant-positif { color: #00A86B; font-weight: 700; }
+        .montant-negatif { color: #1A1A2E; font-weight: 600; }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge-actif    { background: #e8f5e9; color: #00A86B; }
+        .badge-suspendu { background: #fff3e0; color: #E65100; }
+        .badge-type     { background: #f5f5f7; color: #666; }
+
+        /* Forms */
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1A1A2E;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e5e5ea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #E6007E;
+        }
+
+        /* Grid */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 900px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        /* Solde card */
+        .solde-card {
+            background: linear-gradient(135deg, #E6007E 0%, #C20069 100%);
+            color: #fff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .solde-card .label {
+            font-size: 13px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .solde-card .montant {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+        .solde-card .iban {
+            font-size: 13px;
+            opacity: 0.9;
+            font-family: monospace;
+        }
+
+        .info-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 4px solid #E6007E;
+        }
+        .info-card .label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-card .value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 6px;
+            color: #1A1A2E;
+        }
+    </style>
+</head>
+<body>
+
+{% if session.user %}
+<div class="header">
+    <div class="logo">Bourso<span>Bank</span></div>
+    <div class="header-right">
+        <div class="user-badge">
+            <div class="avatar">{{ user.nom[0] }}</div>
+            <span>{{ user.nom }}</span>
+        </div>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Déconnexion</a>
+    </div>
+</div>
+
+<div class="nav">
+    <a href="{{ url_for('dashboard') }}"     class="{% if request.endpoint == 'dashboard' %}active{% endif %}">Mes comptes</a>
+    <a href="{{ url_for('releve') }}"        class="{% if request.endpoint == 'releve' %}active{% endif %}">Relevé</a>
+    <a href="{{ url_for('virement') }}"      class="{% if request.endpoint == 'virement' %}active{% endif %}">Virements</a>
+    <a href="{{ url_for('cartes') }}"        class="{% if request.endpoint == 'cartes' %}active{% endif %}">Cartes</a>
+    <a href="{{ url_for('epargne') }}"       class="{% if request.endpoint == 'epargne' %}active{% endif %}">Épargne</a>
+    <a href="{{ url_for('domiciliation') }}" class="{% if request.endpoint == 'domiciliation' %}active{% endif %}">Domiciliations</a>
+    <a href="{{ url_for('credit') }}"        class="{% if request.endpoint == 'credit' %}active{% endif %}">Crédit</a>
+    <a href="{{ url_for('coordonnees') }}"   class="{% if request.endpoint == 'coordonnees' %}active{% endif %}">RIB</a>
+    <a href="{{ url_for('notifications') }}" class="{% if request.endpoint == 'notifications' %}active{% endif %}">🔔 Alertes</a>
+</div>
+{% endif %}
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

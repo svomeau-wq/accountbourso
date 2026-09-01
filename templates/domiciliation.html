@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Domiciliations - BoursoBank{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Mes domiciliations</h1>
+
+<div class="grid-2">
+    <div class="info-card">
+        <div class="label">Domiciliations actives</div>
+        <div class="value">{{ domiciliations|selectattr('statut', 'equalto', 'Actif')|list|length }}</div>
+    </div>
+    <div class="info-card" style="border-left-color: #00A86B;">
+        <div class="label">Montant mensuel estimé</div>
+        <div class="value">{{ "%.2f"|format(total_mensuel) }} €</div>
+    </div>
+</div>
+
+<div class="card" style="margin-top:20px;">
+    <div class="card-title">
+        Liste des prélèvements et abonnements
+        <a href="#">+ Ajouter une domiciliation</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Créancier</th>
+                <th>Référence</th>
+                <th>Type</th>
+                <th>Prochaine échéance</th>
+                <th style="text-align:right;">Montant estimé</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in domiciliations %}
+            <tr>
+                <td><strong>{{ d.creancier }}</strong></td>
+                <td style="font-family:monospace; font-size:12px; color:#666;">{{ d.reference }}</td>
+                <td><span class="badge badge-type">{{ d.type }}</span></td>
+                <td>{{ d.prochaine }}</td>
+                <td style="text-align:right;" class="montant-negatif">-{{ "%.2f"|format(d.montant_estime) }} €</td>
+                <td>
+                    <span class="badge {% if d.statut == 'Actif' %}badge-actif{% else %}badge-suspendu{% endif %}">
+                        {{ d.statut }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <div class="card-title">Coordonnées pour vos créanciers</div>
+    <p style="color:#666; font-size:14px; line-height:1.6;">
+        Communiquez ces informations à vos créanciers pour mettre en place un nouveau prélèvement SEPA.
+    </p>
+    <div style="margin-top:16px; padding:16px; background:#f5f5f7; border-radius:8px; font-family:monospace; font-size:14px;">
+        <div><strong>Titulaire :</strong> {{ user.nom }}</div>
+        <div><strong>IBAN :</strong> {{ user.iban }}</div>
+        <div><strong>BIC :</strong> {{ user.bic }}</div>
+    </div>
+</div>
+{% endblock %}

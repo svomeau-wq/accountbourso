@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Relevé de compte - BoursoBank{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Relevé de compte</h1>
+
+<div class="grid-3">
+    <div class="info-card">
+        <div class="label">Solde actuel</div>
+        <div class="value">{{ "%.2f"|format(solde) }} €</div>
+    </div>
+    <div class="info-card" style="border-left-color: #00A86B;">
+        <div class="label">Total crédits</div>
+        <div class="value" style="color: #00A86B;">+{{ "%.2f"|format(credits) }} €</div>
+    </div>
+    <div class="info-card" style="border-left-color: #D32F2F;">
+        <div class="label">Total débits</div>
+        <div class="value" style="color: #D32F2F;">{{ "%.2f"|format(debits) }} €</div>
+    </div>
+</div>
+
+<div class="card" style="margin-top:20px;">
+    <div class="card-title">Filtrer les opérations</div>
+    <form method="GET" style="display:grid; grid-template-columns: 2fr 1fr 1fr auto; gap:12px; align-items:end;">
+        <div class="form-group" style="margin:0;">
+            <label for="q">Recherche</label>
+            <input type="text" id="q" name="q" value="{{ q }}" placeholder="Libellé, créancier...">
+        </div>
+        <div class="form-group" style="margin:0;">
+            <label for="type">Type</label>
+            <select id="type" name="type">
+                <option value="">Tous</option>
+                <option value="Carte"        {% if op_type == 'Carte' %}selected{% endif %}>Carte</option>
+                <option value="Virement"     {% if op_type == 'Virement' %}selected{% endif %}>Virement</option>
+                <option value="Prélèvement"  {% if op_type == 'Prélèvement' %}selected{% endif %}>Prélèvement</option>
+                <option value="Retrait"      {% if op_type == 'Retrait' %}selected{% endif %}>Retrait</option>
+            </select>
+        </div>
+        <div class="form-group" style="margin:0;">
+            <label for="mois">Mois</label>
+            <select id="mois" name="mois">
+                <option value="">Tous</option>
+                {% for m in mois_dispo %}
+                <option value="{{ m }}" {% if mois == m %}selected{% endif %}>{{ m }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+    </form>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        {{ operations|length }} opération{{ 's' if operations|length > 1 else '' }}
+        <a href="#">Télécharger PDF ↓</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Libellé</th>
+                <th>Type</th>
+                <th style="text-align:right;">Montant</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for op in operations %}
+            <tr>
+                <td>{{ op.date }}</td>
+                <td>{{ op.libelle }}</td>
+                <td><span class="badge badge-type">{{ op.type }}</span></td>
+                <td style="text-align:right;" class="{% if op.montant > 0 %}montant-positif{% else %}montant-negatif{% endif %}">
+                    {{ "%+.2f"|format(op.montant) }} €
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" style="text-align:center; padding:30px; color:#999;">Aucune opération trouvée pour ces filtres.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

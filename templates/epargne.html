@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Épargne - BoursoBank{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Mon épargne</h1>
+
+<div class="grid-2">
+    <div class="card">
+        <div class="card-title">Livret épargne</div>
+        <div style="font-size:36px; font-weight:700; color:#E6007E;">{{ "%.2f"|format(user.livret) }} €</div>
+        <div style="margin-top:16px; padding-top:16px; border-top:1px solid #f0f0f0;">
+            <div style="display:flex; justify-content:space-between; padding:6px 0;">
+                <span style="color:#666;">Taux d'intérêt</span>
+                <strong>3,00 %</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:6px 0;">
+                <span style="color:#666;">Plafond</span>
+                <strong>22 950 €</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:6px 0;">
+                <span style="color:#666;">Intérêts générés (2025)</span>
+                <strong style="color:#00A86B;">+ 382,50 €</strong>
+            </div>
+        </div>
+        <button class="btn btn-primary" style="margin-top:16px;">Verser sur le livret</button>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Plan d'Épargne en Actions (PEA)</div>
+        <div style="font-size:36px; font-weight:700; color:#E6007E;">{{ "%.2f"|format(valorisation) }} €</div>
+        <div style="margin-top:16px; padding-top:16px; border-top:1px solid #f0f0f0;">
+            <div style="display:flex; justify-content:space-between; padding:6px 0;">
+                <span style="color:#666;">Investi (PRU)</span>
+                <strong>7 500,00 €</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:6px 0;">
+                <span style="color:#666;">+/- Value latente</span>
+                <strong class="{% if plus_value > 0 %}montant-positif{% else %}montant-negatif{% endif %}">
+                    {{ "%+.2f"|format(plus_value) }} €
+                </strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:6px 0;">
+                <span style="color:#666;">Performance</span>
+                <strong style="color:#00A86B;">+ {{ "%.1f"|format(plus_value / 7500 * 100) }} %</strong>
+            </div>
+        </div>
+        <button class="btn btn-primary" style="margin-top:16px;">Passer un ordre</button>
+    </div>
+</div>
+
+<div class="card" style="margin-top:20px;">
+    <div class="card-title">
+        Portefeuille PEA - Détail des positions
+        <a href="#">Exporter ↓</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>ISIN</th>
+                <th style="text-align:right;">Quantité</th>
+                <th style="text-align:right;">Cours</th>
+                <th style="text-align:right;">Valorisation</th>
+                <th style="text-align:right;">Variation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in portefeuille %}
+            <tr>
+                <td><strong>{{ t.titre }}</strong></td>
+                <td style="font-family:monospace; font-size:12px; color:#666;">{{ t.isin }}</td>
+                <td style="text-align:right;">{{ t.quantite }}</td>
+                <td style="text-align:right;">{{ "%.2f"|format(t.cours) }} €</td>
+                <td style="text-align:right;"><strong>{{ "%.2f"|format(t.quantite * t.cours) }} €</strong></td>
+                <td style="text-align:right;" class="{% if t.variation > 0 %}montant-positif{% else %}montant-negatif{% endif %}">
+                    {{ "%+.2f"|format(t.variation) }} %
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <div class="card-title">Découvrez nos autres produits d'épargne</div>
+    <div class="grid-3">
+        <div style="padding:16px; background:#f5f5f7; border-radius:8px;">
+            <strong>Assurance Vie</strong>
+            <p style="font-size:13px; color:#666; margin-top:6px;">À partir de 300€, fonds en euros et unités de compte.</p>
+        </div>
+        <div style="padding:16px; background:#f5f5f7; border-radius:8px;">
+            <strong>LDDS</strong>
+            <p style="font-size:13px; color:#666; margin-top:6px;">Livret de Développement Durable, 3% net d'impôts.</p>
+        </div>
+        <div style="padding:16px; background:#f5f5f7; border-radius:8px;">
+            <strong>PER</strong>
+            <p style="font-size:13px; color:#666; margin-top:6px;">Plan Épargne Retraite, avec avantage fiscal.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

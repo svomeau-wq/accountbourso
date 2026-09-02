@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Coordonnées bancaires - BoursoBank{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Mes coordonnées bancaires (RIB)</h1>
+
+<div class="card">
+    <div class="card-title">
+        Relevé d'Identité Bancaire
+        <a href="{{ url_for('rib_pdf') }}">Télécharger PDF ↓</a>
+    </div>
+    <div style="padding:20px; background:#f5f5f7; border-radius:8px; line-height:2;">
+        <div><strong>Titulaire :</strong> {{ user.nom }}</div>
+        <div><strong>Adresse :</strong> {{ user.adresse }}</div>
+        <div style="margin-top:14px;"><strong>IBAN :</strong> <span style="font-family:monospace;">{{ user.iban }}</span></div>
+        <div><strong>BIC :</strong> <span style="font-family:monospace;">{{ user.bic }}</span></div>
+        <div><strong>Banque :</strong> BoursoBank</div>
+        <div><strong>Domiciliation :</strong> BoursoBank Paris</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">Coordonnées personnelles</div>
+    <div class="grid-2">
+        <div>
+            <div style="color:#666; font-size:12px; text-transform:uppercase; letter-spacing:0.5px;">Email</div>
+            <div style="font-size:16px; font-weight:600; margin-top:4px;">{{ user.email }}</div>
+        </div>
+        <div>
+            <div style="color:#666; font-size:12px; text-transform:uppercase; letter-spacing:0.5px;">Téléphone</div>
+            <div style="font-size:16px; font-weight:600; margin-top:4px;">{{ user.telephone }}</div>
+        </div>
+    </div>
+    <div style="margin-top:20px;">
+        <a href="#" class="btn btn-secondary">Modifier mes coordonnées</a>
+    </div>
+</div>
+{% endblock %}

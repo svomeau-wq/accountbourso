@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Mes cartes - BoursoBank{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Mes cartes bancaires</h1>
+
+<div class="grid-2">
+    {% for c in cartes %}
+    <div>
+        <!-- Carte visuelle -->
+        <div style="background: linear-gradient(135deg, {{ c.couleur }} 0%, #000 100%);
+                    color:#fff;
+                    border-radius:16px;
+                    padding:28px;
+                    height:200px;
+                    display:flex;
+                    flex-direction:column;
+                    justify-content:space-between;
+                    box-shadow:0 8px 24px rgba(0,0,0,0.15);
+                    position:relative;
+                    overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div style="font-size:14px; opacity:0.85; letter-spacing:1px;">{{ c.type }}</div>
+                <div style="width:40px; height:30px; background:linear-gradient(135deg,#FFD700,#B8860B); border-radius:4px;"></div>
+            </div>
+            <div style="font-family:monospace; font-size:20px; letter-spacing:3px;">{{ c.numero }}</div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; font-size:12px;">
+                <div>
+                    <div style="opacity:0.7; font-size:10px; letter-spacing:1px;">TITULAIRE</div>
+                    <div style="font-weight:600;">{{ c.titulaire }}</div>
+                </div>
+                <div>
+                    <div style="opacity:0.7; font-size:10px; letter-spacing:1px;">EXPIRE</div>
+                    <div style="font-weight:600;">{{ c.expiration }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Infos carte -->
+        <div class="card" style="margin-top:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <strong>Statut</strong>
+                <span class="badge badge-actif">{{ c.statut }}</span>
+            </div>
+
+            <div style="margin-bottom:16px;">
+                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">
+                    <span>Plafond paiement (30j)</span>
+                    <span><strong>{{ "%.2f"|format(c.utilise_paiement) }} €</strong> / {{ c.plafond_paiement }} €</span>
+                </div>
+                <div style="background:#f0f0f0; height:8px; border-radius:4px; overflow:hidden;">
+                    <div style="background:#E6007E; height:100%; width:{{ (c.utilise_paiement / c.plafond_paiement * 100)|round(1) }}%;"></div>
+                </div>
+            </div>
+
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">
+                    <span>Plafond retrait (7j)</span>
+                    <span><strong>{{ "%.2f"|format(c.utilise_retrait) }} €</strong> / {{ c.plafond_retrait }} €</span>
+                </div>
+                <div style="background:#f0f0f0; height:8px; border-radius:4px; overflow:hidden;">
+                    <div style="background:#00A86B; height:100%; width:{{ (c.utilise_retrait / c.plafond_retrait * 100)|round(1) }}%;"></div>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn btn-secondary" style="font-size:12px; padding:8px 16px;">Modifier plafonds</button>
+                <button class="btn btn-secondary" style="font-size:12px; padding:8px 16px;">Bloquer</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="card" style="margin-top:20px;">
+    <div class="card-title">Commander une nouvelle carte</div>
+    <p style="color:#666; font-size:14px; line-height:1.7;">
+        Découvrez nos cartes bancaires : Welcome (gratuite), Ultim (premium), Metal (haut de gamme).
+    </p>
+    <button class="btn btn-primary" style="margin-top:12px;">Découvrir les offres</button>
+</div>
+{% endblock %}

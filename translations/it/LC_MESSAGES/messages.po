@@ -1,0 +1,175 @@
+# Italian translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR [EMAIL@ADDRESS](mailto:EMAIL@ADDRESS), 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-09-02 18:35+0200\n"
+"PO-Revision-Date: 2026-09-02 18:15+0200\n"
+"Last-Translator: FULL NAME [EMAIL@ADDRESS](mailto:EMAIL@ADDRESS)\n"
+"Language: it\n"
+"Language-Team: it [LL@li.org](mailto:LL@li.org)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/base.html:356
+msgid "Déconnexion"
+msgstr "Disconnessione"
+
+#: templates/base.html:366
+msgid "Mes comptes"
+msgstr "I miei conti"
+
+#: templates/base.html:370
+msgid "Relevé"
+msgstr "Estratto conto"
+
+#: templates/base.html:374
+msgid "Virements"
+msgstr "Bonifici"
+
+#: templates/base.html:378
+msgid "Cartes"
+msgstr "Carte"
+
+#: templates/base.html:382
+msgid "Épargne"
+msgstr "Risparmio"
+
+#: templates/base.html:386
+msgid "Domiciliations"
+msgstr "Domiciliazioni"
+
+#: templates/base.html:390
+msgid "Crédit"
+msgstr "Credito"
+
+#: templates/base.html:394
+msgid "RIB"
+msgstr "Coordinate bancarie"
+
+#: templates/base.html:398
+msgid "Alertes"
+msgstr "Avvisi"
+
+#: templates/virement.html:2
+msgid "Nouveau virement"
+msgstr "Nuovo bonifico"
+
+#: templates/virement.html:6
+msgid "Effectuer un virement"
+msgstr "Effettuare un bonifico"
+
+#: templates/virement.html:13
+msgid "Informations de l'expéditeur et bénéficiaire"
+msgstr "Informazioni del mittente e del beneficiario"
+
+#: templates/virement.html:17
+msgid "Prénom"
+msgstr "Nome"
+
+#: templates/virement.html:21
+msgid "Nom"
+msgstr "Cognome"
+
+#: templates/virement.html:27
+#, fuzzy
+msgid "Adresse"
+msgstr "Indirizzo"
+
+#: templates/virement.html:33
+msgid "Ville"
+msgstr "Città"
+
+#: templates/virement.html:37
+msgid "Pays"
+msgstr "Paese"
+
+#: templates/virement.html:44
+msgid "Email du bénéficiaire"
+msgstr "Email del beneficiario"
+
+#: templates/virement.html:46
+msgid "pour la confirmation PDF"
+msgstr "per la conferma PDF"
+msgid "IBAN (Numero de compte)"
+msgstr "IBAN (Numero di conto)"
+#: templates/virement.html:53
+msgid "Détails du virement"
+msgstr "Dettagli del bonifico"
+
+#: templates/virement.html:57
+msgid "IBAN (Numero de compte)"
+msgstr ""
+
+#: templates/virement.html:60
+msgid "BIC"
+msgstr "BIC"
+
+#: templates/virement.html:63
+msgid "Montant (€)"
+msgstr "Importo (€)"
+
+#: templates/virement.html:68
+msgid "Motif"
+msgstr "Causale"
+
+#: templates/virement.html:69
+msgid "Référence ou motif du virement"
+msgstr "Riferimento o causale del bonifico"
+
+#: templates/virement.html:71
+msgid "Nom d'expéditeur"
+msgstr "Cognome del mittente"
+
+#: templates/virement.html:74
+msgid "Prénom de l'expéditeur"
+msgstr "Nome del mittente"
+
+#: templates/virement.html:79
+msgid "Valider et envoyer la confirmation"
+msgstr "Confermare e inviare la conferma"
+
+#: templates/virement.html:83
+msgid "Annuler"
+msgstr "Annulla"
+
+#: templates/virement.html:91
+msgid "Solde disponible"
+msgstr "Saldo disponibile"
+
+#: templates/virement.html:96
+#, fuzzy
+msgid "Informations"
+msgstr "Informazioni"
+
+#: templates/virement.html:98
+msgid "Les virements SEPA sont gratuits et exécutés sous 1 jour ouvré."
+msgstr "I bonifici SEPA sono gratuiti e vengono eseguiti entro 1 giorno lavorativo."
+
+#: templates/virement.html:99
+msgid "Plafond journalier"
+msgstr "Limite giornaliera"
+
+#: templates/virement.html:100
+msgid "Une confirmation PDF sera envoyée au bénéficiaire par email."
+msgstr "Una conferma PDF verrà inviata al beneficiario via email."
+
+#: templates/virement.html:101
+msgid "Aucune annulation possible après confirmation."
+msgstr "Nessun annullamento possibile dopo la conferma."
+
+#: templates/virement.html:109
+msgid "Confirmation par email"
+msgstr "Conferma via email"
+
+#: templates/virement.html:111
+msgid "Envoyée depuis noreply@crasdor.org"
+msgstr ""
+

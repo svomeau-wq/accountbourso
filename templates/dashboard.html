@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Mes comptes - BoursoBank{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Bonjour {{ user.nom.split()[0] }} 👋</h1>
+
+<div class="solde-card">
+    <div class="label">Patrimoine total</div>
+    <div class="montant">{{ "%.2f"|format(total) }} €</div>
+    <div class="iban">IBAN : {{ user.iban }}</div>
+</div>
+
+<div class="grid-3">
+    <div class="info-card">
+        <div class="label">Compte courant</div>
+        <div class="value">{{ "%.2f"|format(user.compte_courant) }} €</div>
+    </div>
+    <div class="info-card">
+        <div class="label">Livret épargne</div>
+        <div class="value">{{ "%.2f"|format(user.livret) }} €</div>
+    </div>
+    <div class="info-card">
+        <div class="label">PEA</div>
+        <div class="value">{{ "%.2f"|format(user.pea) }} €</div>
+    </div>
+</div>
+
+<div style="margin: 24px 0;">
+    <a href="{{ url_for('virement') }}" class="btn btn-primary">+ Nouveau virement</a>
+    <a href="{{ url_for('releve') }}" class="btn btn-secondary" style="margin-left:8px;">Voir le relevé complet</a>
+    <a href="{{ url_for('notifications') }}" class="btn btn-secondary" style="margin-left:8px;">
+        🔔 Notifications{% if notif_non_lues %} ({{ notif_non_lues }}){% endif %}
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        Dernières opérations
+        <a href="{{ url_for('releve') }}">Voir tout →</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Libellé</th>
+                <th>Type</th>
+                <th style="text-align:right;">Montant</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for op in operations %}
+            <tr>
+                <td>{{ op.date }}</td>
+                <td>{{ op.libelle }}</td>
+                <td><span class="badge badge-type">{{ op.type }}</span></td>
+                <td style="text-align:right;" class="{% if op.montant > 0 %}montant-positif{% else %}montant-negatif{% endif %}">
+                    {{ "%+.2f"|format(op.montant) }} €
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

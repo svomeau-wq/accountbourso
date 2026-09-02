@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Simulateur de crédit - BoursoBank{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Simulateur de crédit</h1>
+
+<div class="grid-2">
+    <div class="card">
+        <div class="card-title">Paramètres du crédit</div>
+        <form method="POST">
+            <div class="form-group">
+                <label for="montant">Montant emprunté (€)</label>
+                <input type="number" id="montant" name="montant" step="100" min="1000" placeholder="20000" value="{{ result.montant if result else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="duree">Durée (mois)</label>
+                <input type="number" id="duree" name="duree" min="6" max="360" placeholder="60" value="{{ result.duree if result else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="taux">Taux d'intérêt annuel (%)</label>
+                <input type="number" id="taux" name="taux" step="0.01" min="0" placeholder="4.50" value="{{ result.taux if result else '' }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Calculer</button>
+        </form>
+    </div>
+
+    <div>
+        {% if result %}
+        <div class="solde-card">
+            <div class="label">Mensualité</div>
+            <div class="montant">{{ "%.2f"|format(result.mensualite) }} €</div>
+            <div style="opacity:0.9; font-size:13px;">par mois pendant {{ result.duree }} mois</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Détails du crédit</div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0;">
+                <span style="color:#666;">Montant emprunté</span>
+                <strong>{{ "%.2f"|format(result.montant) }} €</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0;">
+                <span style="color:#666;">Taux annuel</span>
+                <strong>{{ "%.2f"|format(result.taux) }} %</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0;">
+                <span style="color:#666;">Durée</span>
+                <strong>{{ result.duree }} mois ({{ "%.1f"|format(result.duree / 12) }} ans)</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0;">
+                <span style="color:#666;">Coût total du crédit</span>
+                <strong class="montant-negatif">{{ "%.2f"|format(result.cout_credit) }} €</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0;">
+                <span style="color:#666;">Montant total dû</span>
+                <strong>{{ "%.2f"|format(result.cout_total) }} €</strong>
+            </div>
+        </div>
+        {% else %}
+        <div class="card" style="text-align:center; padding:60px 24px;">
+            <div style="font-size:48px; margin-bottom:16px;">📊</div>
+            <h3 style="color:#666;">Simulez votre crédit</h3>
+            <p style="color:#999; font-size:14px; margin-top:8px;">Remplissez le formulaire pour estimer vos mensualités</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">Nos offres de crédit</div>
+    <div class="grid-3">
+        <div style="padding:16px; background:#f5f5f7; border-radius:8px;">
+            <strong>Crédit Conso</strong>
+            <p style="font-size:13px; color:#666; margin-top:6px;">Taux à partir de 2,90% TAEG fixe.</p>
+        </div>
+        <div style="padding:16px; background:#f5f5f7; border-radius:8px;">
+            <strong>Crédit Auto</strong>
+            <p style="font-size:13px; color:#666; margin-top:6px;">Financez votre véhicule jusqu'à 75 000€.</p>
+        </div>
+        <div style="padding:16px; background:#f5f5f7; border-radius:8px;">
+            <strong>Crédit Immobilier</strong>
+            <p style="font-size:13px; color:#666; margin-top:6px;">Taux compétitifs, étude gratuite.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

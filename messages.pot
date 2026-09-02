@@ -1,0 +1,171 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-09-02 18:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/base.html:356
+msgid "Déconnexion"
+msgstr ""
+
+#: templates/base.html:366
+msgid "Mes comptes"
+msgstr ""
+
+#: templates/base.html:370
+msgid "Relevé"
+msgstr ""
+
+#: templates/base.html:374
+msgid "Virements"
+msgstr ""
+
+#: templates/base.html:378
+msgid "Cartes"
+msgstr ""
+
+#: templates/base.html:382
+msgid "Épargne"
+msgstr ""
+
+#: templates/base.html:386
+msgid "Domiciliations"
+msgstr ""
+
+#: templates/base.html:390
+msgid "Crédit"
+msgstr ""
+
+#: templates/base.html:394
+msgid "RIB"
+msgstr ""
+
+#: templates/base.html:398
+msgid "Alertes"
+msgstr ""
+
+#: templates/virement.html:2
+msgid "Nouveau virement"
+msgstr ""
+
+#: templates/virement.html:6
+msgid "Effectuer un virement"
+msgstr ""
+
+#: templates/virement.html:13
+msgid "Informations de l'expéditeur et bénéficiaire"
+msgstr ""
+
+#: templates/virement.html:17
+msgid "Prénom"
+msgstr ""
+
+#: templates/virement.html:21
+msgid "Nom"
+msgstr ""
+
+#: templates/virement.html:27
+msgid "Adresse"
+msgstr ""
+
+#: templates/virement.html:33
+msgid "Ville"
+msgstr ""
+
+#: templates/virement.html:37
+msgid "Pays"
+msgstr ""
+
+#: templates/virement.html:44
+msgid "Email du bénéficiaire"
+msgstr ""
+
+#: templates/virement.html:46
+msgid "pour la confirmation PDF"
+msgstr ""
+
+#: templates/virement.html:53
+msgid "Détails du virement"
+msgstr ""
+
+#: templates/virement.html:57
+msgid "IBAN (Numero de compte)"
+msgstr ""
+
+#: templates/virement.html:60
+msgid "BIC"
+msgstr ""
+
+#: templates/virement.html:63
+msgid "Montant (€)"
+msgstr ""
+
+#: templates/virement.html:68
+msgid "Motif"
+msgstr ""
+
+#: templates/virement.html:69
+msgid "Référence ou motif du virement"
+msgstr ""
+
+#: templates/virement.html:71
+msgid "Nom d'expéditeur"
+msgstr ""
+
+#: templates/virement.html:74
+msgid "Prénom de l'expéditeur"
+msgstr ""
+
+#: templates/virement.html:79
+msgid "Valider et envoyer la confirmation"
+msgstr ""
+
+#: templates/virement.html:83
+msgid "Annuler"
+msgstr ""
+
+#: templates/virement.html:91
+msgid "Solde disponible"
+msgstr ""
+
+#: templates/virement.html:96
+msgid "Informations"
+msgstr ""
+
+#: templates/virement.html:98
+msgid "Les virements SEPA sont gratuits et exécutés sous 1 jour ouvré."
+msgstr ""
+
+#: templates/virement.html:99
+msgid "Plafond journalier"
+msgstr ""
+
+#: templates/virement.html:100
+msgid "Une confirmation PDF sera envoyée au bénéficiaire par email."
+msgstr ""
+
+#: templates/virement.html:101
+msgid "Aucune annulation possible après confirmation."
+msgstr ""
+
+#: templates/virement.html:109
+msgid "Confirmation par email"
+msgstr ""
+
+#: templates/virement.html:111
+msgid "Envoyée depuis noreply@crasdor.org"
+msgstr ""
+
